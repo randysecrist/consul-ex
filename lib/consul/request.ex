@@ -35,7 +35,7 @@ defmodule Consul.Request do
     # Allow host to be defined by env variable NODE_IP
     case System.get_env("NODE_IP") do
       nil -> Application.get_env(:consul, :host, "localhost")
-      var -> Application.get_env(:consul, :host, var)
+      var -> var
     end
   end
 

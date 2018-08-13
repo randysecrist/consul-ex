@@ -32,7 +32,11 @@ defmodule Consul.Request do
   #
 
   defp host do
-    Application.get_env(:consul, :host, "localhost")
+    # Allow host to be defined by env variable NODE_IP
+    case System.get_env("NODE_IP") do
+      nil -> Application.get_env(:consul, :host, "localhost")
+      var -> Application.get_env(:consul, :host, var)
+    end
   end
 
   defp port do

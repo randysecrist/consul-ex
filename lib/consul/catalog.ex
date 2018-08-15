@@ -46,9 +46,10 @@ defmodule Consul.Catalog do
       |> req_get()
   end
 
-  @spec service(binary, Keyword.t) :: Endpoint.response
-  def service(name, opts \\ []) do
+  @spec service(binary, Keyword.t, Keyword.t) :: Endpoint.response | no_return
+  def service(name, opts \\ [], http_opts \\ []) do
     build_url([@catalog, @service, name], opts)
-      |> req_get()
+      |> req_get([], http_opts)
   end
+
 end
